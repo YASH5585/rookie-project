@@ -337,5 +337,7 @@ export const defaultProfile: Profile = {
     linkedin: "https://linkedin.com/in/alexrivera",
     leetcode: "https://leetcode.com/alexcodes"
   },
+  applications: [],
+  aiInsights: [],
   updatedAt: "2026-06-25T00:00:00.000Z"
 };

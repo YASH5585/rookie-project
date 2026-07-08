@@ -28,7 +28,11 @@ export function generateResume(profile: Profile, template: ResumeTemplate) {
     "Software Engineer": "engineering impact, scalable systems, frontend/backend delivery, and coding strength",
     "Data Analyst": "analytics, data storytelling, dashboards, and measurable decision support",
     "Product Manager": "product thinking, customer outcomes, execution, and cross-functional clarity",
-    "Research Intern": "research ability, experimentation, documentation, and technical depth"
+    "Research Intern": "research ability, experimentation, documentation, and technical depth",
+    "Executive": "leadership, strategy, org impact, and cross-functional execution",
+    "Academic": "research depth, publications, teaching, and rigorous methodology",
+    "Creative": "design sense, storytelling, brand voice, and visual communication",
+    "Functional": "domain expertise, operations, and measurable business outcomes"
   };
 
   return [
