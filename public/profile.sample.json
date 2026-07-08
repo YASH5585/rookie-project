@@ -1,0 +1,7 @@
+{
+  "id": "profile-local-demo",
+  "name": "Alex Rivera",
+  "headline": "Full-stack developer building useful AI products with measurable impact.",
+  "bio": "I design and ship polished software across web, data, and AI workflows.",
+  "profileSystem": "This file mirrors the local JSON profile model used by the app. Export your profile from the CMS to keep a portable backup."
+}
