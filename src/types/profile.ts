@@ -6,12 +6,85 @@ export type SkillCategory =
   | "AI/ML"
   | "Cloud"
   | "Design"
-  | "Professional";
+  | "Professional"
+  | "Mathematics"
+  | "Physics"
+  | "Chemistry"
+  | "Mechanical"
+  | "Electrical"
+  | "Civil"
+  | "Chemical"
+  | "Aerospace"
+  | "Automotive"
+  | "Industrial"
+  | "Materials"
+  | "Manufacturing"
+  | "Robotics"
+  | "Embedded"
+  | "Networking"
+  | "Security"
+  | "Testing"
+  | "DevOps";
+
+export type EngineeringBranch =
+  | "Computer Science"
+  | "Software Engineering"
+  | "Data Science"
+  | "Artificial Intelligence"
+  | "Machine Learning"
+  | "Cybersecurity"
+  | "Web Development"
+  | "Mobile Development"
+  | "Cloud Computing"
+  | "DevOps"
+  | "Product Management"
+  | "UX/UI Design"
+  | "Mechanical Engineering"
+  | "Electrical Engineering"
+  | "Civil Engineering"
+  | "Chemical Engineering"
+  | "Aerospace Engineering"
+  | "Automotive Engineering"
+  | "Industrial Engineering"
+  | "Materials Engineering"
+  | "Manufacturing Engineering"
+  | "Robotics Engineering"
+  | "Embedded Systems"
+  | "Networking Engineering"
+  | "Security Engineering"
+  | "Academic/PhD"
+  | "Entrepreneur"
+  | "Freelancer";
+
+export type Discipline =
+  | "Computer Science"
+  | "Electrical"
+  | "Mechanical"
+  | "Civil"
+  | "Chemical"
+  | "Aerospace"
+  | "Automotive"
+  | "Industrial"
+  | "Materials"
+  | "Manufacturing"
+  | "Robotics"
+  | "Embedded"
+  | "Networking"
+  | "Security"
+  | "Security Engineering"
+  | "Mathematics"
+  | "Physics"
+  | "Chemistry"
+  | "Design"
+  | "Business"
+  | "Medicine"
+  | "Finance";
 
 export type Skill = {
   id: string;
   name: string;
   category: SkillCategory;
+  discipline?: Discipline;
   level: number;
   targetLevel: number;
   evidence: string;
@@ -21,10 +94,13 @@ export type Education = {
   institution: string;
   degree: string;
   field: string;
+  branch?: EngineeringBranch;
   startYear: string;
   endYear: string;
   score: string;
   highlights: string[];
+  coursework?: string[];
+  projects?: string[];
 };
 
 export type Experience = {
@@ -36,11 +112,14 @@ export type Experience = {
   endDate: string;
   summary: string;
   impact: string[];
+  branch?: EngineeringBranch;
+  technologies?: string[];
 };
 
 export type ProjectMetric = {
   label: string;
   value: string;
+  unit?: string;
 };
 
 export type Project = {
@@ -49,12 +128,14 @@ export type Project = {
   description: string;
   longDescription: string;
   techStack: string[];
+  branch?: EngineeringBranch;
   liveUrl: string;
   githubUrl: string;
   category: string;
   impact: string;
   metrics: ProjectMetric[];
   featured: boolean;
+  domain?: string;
 };
 
 export type Certification = {
@@ -63,6 +144,7 @@ export type Certification = {
   issuer: string;
   year: string;
   url: string;
+  branch?: EngineeringBranch;
 };
 
 export type Achievement = {
@@ -70,6 +152,8 @@ export type Achievement = {
   title: string;
   context: string;
   year: string;
+  branch?: EngineeringBranch;
+  type?: "academic" | "competition" | "hackathon" | "open-source" | "leadership";
 };
 
 export type LeetCodeStats = {
@@ -133,10 +217,12 @@ export type GitHubStats = {
 
 export type CareerGoal = {
   targetRole: string;
+  targetBranch?: EngineeringBranch;
   targetTimeline: string;
   preferredDomains: string[];
   targetCompanies: string[];
   learningFocus: string[];
+  careerType: "technical" | "management" | "academic" | "entrepreneur" | "research";
 };
 
 export type ContactInfo = {
@@ -172,6 +258,7 @@ export type Application = {
     date: string;
     label: string;
   }[];
+  branch?: EngineeringBranch;
 };
 
 export type AIInsight = {
@@ -179,6 +266,22 @@ export type AIInsight = {
   type: "InterviewQuestion" | "BioVariation" | "SkillGap";
   content: string;
   context?: string;
+};
+
+export type BranchAnalysis = {
+  branch: EngineeringBranch;
+  averageSalary: {
+    entry: number;
+    mid: number;
+    senior: number;
+  };
+  jobGrowth: number;
+  keySkills: string[];
+  topCompanies: string[];
+  commonCertifications: string[];
+  typicalCareerPath: string[];
+  popularTechnologies: string[];
+  demandRegions: string[];
 };
 
 export type Profile = {
@@ -200,6 +303,10 @@ export type Profile = {
   applications: Application[];
   aiInsights: AIInsight[];
   updatedAt: string;
+  branchAnalysis?: BranchAnalysis;
+  googleId?: string;
+  displayName?: string;
+  photoURL?: string;
 };
 
 export type ResumeTemplate =
@@ -210,7 +317,20 @@ export type ResumeTemplate =
   | "Executive"
   | "Academic"
   | "Creative"
-  | "Functional";
+  | "Functional"
+  | "Mechanical Engineer"
+  | "Electrical Engineer"
+  | "Civil Engineer"
+  | "Chemical Engineer"
+  | "Aerospace Engineer"
+  | "Automotive Engineer"
+  | "Industrial Engineer"
+  | "Materials Engineer"
+  | "Robotics Engineer"
+  | "Embedded Systems Engineer"
+  | "Networking Engineer"
+  | "Security Engineer"
+  | "General / All Branches";
 
 export type GeneratedDocumentType =
   | "resume"

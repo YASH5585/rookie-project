@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
@@ -44,7 +43,8 @@ import {
   LanguageChart,
   LeetCodeChart,
   SkillHeatmap,
-  SkillRadarChart
+  SkillRadarChart,
+  SkillMarketChart
 } from "@/components/charts";
 import { useLocalProfile } from "@/hooks/use-local-profile";
 import {
@@ -66,18 +66,6 @@ import { exportDocx, exportPdf, exportPlainText } from "@/lib/exporters";
 import { downloadText } from "@/lib/utils";
 import type { Application, ApplicationStatus, CodingProfile, CodingPlatform, Profile, Project, ResumeTemplate, Skill } from "@/types/profile";
 
-const ThreeSkillScene = dynamic(
-  () => import("@/components/three-skill-scene").then((module) => module.ThreeSkillScene),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="flex h-full min-h-[320px] items-center justify-center text-sm text-[rgb(var(--muted-foreground))]">
-        Loading 3D skill graph
-      </div>
-    )
-  }
-);
-
 const navItems = [
   { href: "#dashboard", label: "Dashboard" },
   { href: "#benchmarking", label: "Benchmarking" },
@@ -95,7 +83,20 @@ const resumeTemplates: ResumeTemplate[] = [
   "Executive",
   "Academic",
   "Creative",
-  "Functional"
+  "Functional",
+  "Mechanical Engineer",
+  "Electrical Engineer",
+  "Civil Engineer",
+  "Chemical Engineer",
+  "Aerospace Engineer",
+  "Automotive Engineer",
+  "Industrial Engineer",
+  "Materials Engineer",
+  "Robotics Engineer",
+  "Embedded Systems Engineer",
+  "Networking Engineer",
+  "Security Engineer",
+  "General / All Branches"
 ];
 
 const codingPlatforms: CodingPlatform[] = [
@@ -247,16 +248,12 @@ function HeroSection({ profile }: { profile: Profile }) {
         </div>
       </motion.div>
       <motion.div
-        className="relative h-[390px] overflow-hidden rounded-[var(--radius)] border border-[rgba(var(--border),0.75)] bg-slate-950/80 shadow-2xl sm:h-[520px]"
+        className="relative h-[390px] overflow-hidden rounded-[var(--radius)] border border-[rgba(var(--border),0.75)] bg-[rgba(var(--background),0.7)] shadow-2xl sm:h-[520px]"
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.7, delay: 0.08 }}
       >
-        <div className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-[var(--radius)] border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold text-white backdrop-blur-md">
-          <Bot aria-hidden className="h-4 w-4" />
-          Interactive Skill Graph
-        </div>
-        <ThreeSkillScene skills={profile.skills} />
+        <SkillMarketChart skills={profile.skills} branch={profile.careerGoals.targetBranch || "Software Engineering"} />
       </motion.div>
     </section>
   );

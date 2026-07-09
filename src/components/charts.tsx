@@ -20,6 +20,7 @@ import {
 } from "recharts";
 import type { BenchmarkPillar } from "@/lib/scoring";
 import type { CodingProfile, GitHubStats, LeetCodeStats, Skill } from "@/types/profile";
+export { SkillMarketChart } from "@/components/skill-market-chart";
 
 const axisStyle = { fill: "rgb(var(--muted-foreground))", fontSize: 12 };
 const gridColor = "rgba(148, 163, 184, 0.24)";

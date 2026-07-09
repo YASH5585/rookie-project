@@ -2,14 +2,17 @@
   "name": "career-intelligence-portfolio",
   "version": "0.1.0",
   "private": false,
-  "description": "An AI-powered personal portfolio, resume builder, and career intelligence dashboard built with Next.js.",
+  "description": "FREE & Open Source Career Intelligence Portfolio - No account required, no paid features, completely free to use and deploy!",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "export": "next export"
   },
   "dependencies": {
     "@radix-ui/react-slot": "latest",
@@ -19,6 +22,7 @@
     "clsx": "latest",
     "docx": "latest",
     "framer-motion": "latest",
+    "gapi-script": "^1.2.0",
     "jspdf": "latest",
     "lucide-react": "latest",
     "next": "latest",
@@ -39,6 +43,21 @@
     "tailwindcss": "latest",
     "typescript": "latest",
     "vitest": "latest"
+  },
+  "keywords": [
+    "portfolio",
+    "resume",
+    "career",
+    "nextjs",
+    "typescript",
+    "opensource",
+    "free",
+    "no-subscription"
+  ],
+  "homepage": "https://your-deployed-url.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YASH5585/rookie-project.git"
   },
   "allowScripts": {
     "core-js@3.49.0": true,

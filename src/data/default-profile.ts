@@ -1,9 +1,9 @@
 import type { Profile } from "@/types/profile";
 
 export const defaultProfile: Profile = {
-  id: "profile-local-demo",
+  id: "profile-template",
   name: "Alex Rivera",
-  headline: "Full-stack developer building useful AI products with measurable impact.",
+  headline: "Full-stack developer building useful AI products with measurable impact",
   bio: "I design and ship polished software across web, data, and AI workflows. My work focuses on reliable user experiences, clean systems, and practical automation for career and education outcomes.",
   education: [
     {
@@ -323,10 +323,12 @@ export const defaultProfile: Profile = {
   },
   careerGoals: {
     targetRole: "Software Engineering Intern",
+    targetBranch: "Software Engineering",
     targetTimeline: "12 months",
     preferredDomains: ["AI Products", "Developer Tools", "Education Technology"],
     targetCompanies: ["High-growth startups", "Product-led engineering teams", "Research labs"],
-    learningFocus: ["System design fundamentals", "Advanced DSA", "AI application architecture"]
+    learningFocus: ["System design fundamentals", "Advanced DSA", "AI application architecture"],
+    careerType: "technical"
   },
   contact: {
     email: "alex@example.com",
@@ -380,5 +382,5 @@ export const defaultProfile: Profile = {
     }
   ],
   aiInsights: [],
-  updatedAt: "2026-06-25T00:00:00.000Z"
+  updatedAt: "2026-07-09T00:00:00.000Z"
 };

@@ -32,7 +32,20 @@ export function generateResume(profile: Profile, template: ResumeTemplate) {
     "Executive": "leadership, strategy, org impact, and cross-functional execution",
     "Academic": "research depth, publications, teaching, and rigorous methodology",
     "Creative": "design sense, storytelling, brand voice, and visual communication",
-    "Functional": "domain expertise, operations, and measurable business outcomes"
+    "Functional": "domain expertise, operations, and measurable business outcomes",
+    "Mechanical Engineer": "mechanical design, CAD proficiency, manufacturing knowledge, and systems thinking",
+    "Electrical Engineer": "electrical circuits, power systems, control systems, and embedded design",
+    "Civil Engineer": "structural analysis, construction management, project planning, and infrastructure design",
+    "Chemical Engineer": "process design, thermodynamics, safety engineering, and chemical processes",
+    "Aerospace Engineer": "aerodynamics, propulsion, materials science, and flight systems",
+    "Automotive Engineer": "vehicle dynamics, powertrains, emissions, and autonomous systems",
+    "Industrial Engineer": "process optimization, lean manufacturing, supply chain, and operations efficiency",
+    "Materials Engineer": "materials science, characterization, polymer design, and failure analysis",
+    "Robotics Engineer": "robot control, sensors, computer vision, and autonomous systems",
+    "Embedded Systems Engineer": "firmware development, microcontrollers, real-time systems, and IoT",
+    "Networking Engineer": "network design, routing protocols, security, and infrastructure planning",
+    "Security Engineer": "threat modeling, penetration testing, cryptography, and security architecture",
+    "General / All Branches": "diverse technical skills, project delivery, and problem-solving across domains"
   };
 
   return [

@@ -1,4 +1,4 @@
-import type { Profile, SkillCategory } from "@/types/profile";
+import type { Profile, SkillCategory, EngineeringBranch } from "@/types/profile";
 import { average, clamp } from "@/lib/utils";
 
 export type ReadinessScores = {
@@ -9,6 +9,7 @@ export type ReadinessScores = {
   leetcodeMomentum: number;
   codingPlatformMomentum: number;
   profileCompleteness: number;
+  branchSpecific?: Record<EngineeringBranch, number>;
 };
 
 export type BenchmarkSegment =
@@ -19,6 +20,20 @@ export type BenchmarkSegment =
 
 export type BenchmarkResult = {
   segment: BenchmarkSegment;
+  userScore: number;
+  baselineScore: number;
+  delta: number;
+  status: "ahead" | "aligned" | "behind";
+};
+
+export type BranchBenchmarkSegment =
+  | "Entry-level"
+  | "Mid-level"
+  | "Senior-level"
+  | "Principal/Staff";
+
+export type BranchBenchmarkResult = {
+  segment: BranchBenchmarkSegment;
   userScore: number;
   baselineScore: number;
   delta: number;
@@ -42,7 +57,25 @@ const categoryWeights: Record<SkillCategory, number> = {
   "AI/ML": 0.9,
   Cloud: 0.85,
   Design: 0.75,
-  Professional: 0.8
+  Professional: 0.8,
+  Mathematics: 0.85,
+  Physics: 0.8,
+  Chemistry: 0.75,
+  Mechanical: 0.85,
+  Electrical: 0.85,
+  Civil: 0.8,
+  Chemical: 0.8,
+  Aerospace: 0.85,
+  Automotive: 0.8,
+  Industrial: 0.85,
+  Materials: 0.8,
+  Manufacturing: 0.85,
+  Robotics: 0.85,
+  Embedded: 0.9,
+  Networking: 0.8,
+  Security: 0.85,
+  Testing: 0.75,
+  DevOps: 0.85
 };
 
 export function calculateScores(profile: Profile): ReadinessScores {

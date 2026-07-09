@@ -19,21 +19,21 @@ function reviveProfile(value: unknown): Profile {
     experience: (value as Partial<Profile>)?.experience ?? defaultProfile.experience,
     leetCode: {
       ...defaultProfile.leetCode,
-      ...(value as Partial<Profile>)?.leetCode
+      ...((value as Partial<Profile>)?.leetCode ?? {})
     },
     codingProfiles:
       (value as Partial<Profile>)?.codingProfiles ?? defaultProfile.codingProfiles,
     github: {
       ...defaultProfile.github,
-      ...(value as Partial<Profile>)?.github
+      ...((value as Partial<Profile>)?.github ?? {})
     },
     careerGoals: {
       ...defaultProfile.careerGoals,
-      ...(value as Partial<Profile>)?.careerGoals
+      ...((value as Partial<Profile>)?.careerGoals ?? {})
     },
     contact: {
       ...defaultProfile.contact,
-      ...(value as Partial<Profile>)?.contact
+      ...((value as Partial<Profile>)?.contact ?? {})
     },
     applications: (value as Partial<Profile>)?.applications ?? defaultProfile.applications,
     aiInsights: (value as Partial<Profile>)?.aiInsights ?? defaultProfile.aiInsights

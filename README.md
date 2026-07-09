@@ -1,22 +1,25 @@
 # Career Intelligence Portfolio
 
-An open-source, AI-ready personal portfolio, resume builder, career dashboard, and professional branding platform built with Next.js, TypeScript, Tailwind CSS, Framer Motion, React Three Fiber, and a local JSON profile system.
+**FREE & OPEN SOURCE** - No account required, no paid features, completely free to use and deploy!
 
-The MVP is local-first: one structured profile powers the portfolio, resume generator, cover letter generator, SOP generator, benchmarking dashboard, GitHub and multi-platform coding analytics views, project showcase, and CMS editor.
+An open-source personal portfolio, resume builder, career dashboard, and professional branding platform built with Next.js, TypeScript, Tailwind CSS, Framer Motion, React Three Fiber, and a local JSON profile system.
 
 ## Features
 
-- Interactive portfolio hero with a React Three Fiber skill graph.
-- Centralized typed profile database with local storage persistence.
-- Portfolio CMS for editing profile basics, skills, and projects without touching code.
-- Resume, cover letter, SOP, and professional bio generation.
-- Browser-based TXT, PDF, and DOCX exports.
-- Career dashboard with resume readiness, placement readiness, project depth, GitHub momentum, and multi-platform coding momentum scores.
-- Coding analytics for LeetCode, Codeforces, CodeChef, HackerRank, AtCoder, and GeeksforGeeks-ready profiles.
-- Transparent benchmarking against fixed baseline models for first-year students, college students, internship applicants, and software engineering candidates.
-- Radar charts, heatmaps, progress bars, activity charts, and project cards.
-- Dark/light theme support.
-- Modular architecture ready for AI resume review, interview preparation, premium templates, coaching, and application tracking.
+- Interactive portfolio hero with a React Three Fiber skill graph
+- **Multi-disciplinary support** for CS, Engineering, Design, Business, and more
+- Centralized typed profile database with local storage persistence
+- Profile initializer that asks about your career dream (Full Stack, AI Engineer, Mechanical Engineer, etc.)
+- Portfolio CMS for editing profile basics, skills, and projects
+- Resume templates for 25+ engineering and business disciplines
+- Resume, cover letter, SOP, and professional bio generation
+- Browser-based TXT, PDF, and DOCX exports (client-side only)
+- Career dashboard with resume readiness, placement readiness, and GitHub momentum scores
+- Coding analytics for LeetCode, Codeforces, CodeChef, HackerRank, AtCoder
+- Transparent benchmarking against fixed baseline models
+- Radar charts, heatmaps, progress bars, activity charts, and project cards
+- Dark/light theme support
+- **100% FREE** - No subscriptions, no API keys, no backend required
 
 ## Tech Stack
 
@@ -25,10 +28,9 @@ The MVP is local-first: one structured profile powers the portfolio, resume gene
 - Tailwind CSS
 - Framer Motion
 - Three.js / React Three Fiber
-- ShadCN-style local UI primitives
 - Recharts
-- Local Storage + JSON profile model
-- jsPDF and docx for exports
+- **Local Storage only** - No external databases
+- jsPDF and docx for client-side exports
 
 ## Getting Started
 
@@ -48,10 +50,10 @@ Use the CMS section to export/import JSON backups. The exported JSON can later b
 ## Scripts
 
 ```bash
-npm run dev
-npm run build
-npm run start
-npm run typecheck
+npm run dev      # Development server
+npm run build    # Production build
+npm run start    # Start production server
+npm run typecheck  # TypeScript validation
 ```
 
 ## Architecture
@@ -70,14 +72,98 @@ docs                    Architecture, scoring, deployment, and roadmap notes
 
 Benchmarking is intentionally not a real-world ranking. The MVP uses deterministic local estimates with visible weights. See [docs/scoring.md](docs/scoring.md) before changing score logic.
 
-## Deployment
+## 🚀 Free Deployment Options
 
-The app can be deployed to Vercel, Netlify, Docker, or any host that supports Next.js. See [docs/deployment.md](docs/deployment.md).
+### Option 1: Vercel (Recommended for Next.js) - FREE
+
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) and sign up (free)
+3. Import your GitHub repository
+4. Vercel auto-detects Next.js and deploys
+5. Your site gets a free `.vercel.app` domain
+
+**Pros:** Perfect for Next.js, free SSL, global CDN, automatic builds
+**Cons:** Limited to 100GB bandwidth/month on free tier
+
+### Option 2: Netlify - FREE
+
+1. Push your code to GitHub
+2. Go to [netlify.com](https://netlify.com) and sign up (free)
+3. Click "New site from Git" and connect your repo
+4. Set build command: `npm run build`
+5. Set publish directory: `.next`
+6. Deploy!
+
+**Pros:** Generous free tier (100GB bandwidth), drag-and-drop deploy
+**Cons:** Slightly slower builds than Vercel
+
+### Option 3: GitHub Pages - FREE
+
+1. Push your code to GitHub
+2. Go to Settings > Pages
+3. Select source: `gh-pages` branch or `/docs` folder
+4. For static export: `npm run build && npx next export`
+
+**Pros:** Completely free, no build limits
+**Cons:** Requires static export (some dynamic features limited)
+
+### Option 4: Cloudflare Pages - FREE
+
+1. Push your code to GitHub
+2. Go to [cloudflarepages.com](https://cloudflarepages.com)
+3. Connect your GitHub repo
+4. Set build command: `npm run build`
+5. Set output directory: `.next`
+6. Deploy!
+
+**Pros:** Fast global CDN, 500 builds/day free tier
+**Cons:** Newer platform, less documentation than Vercel/Netlify
+
+## One-Click Deploy Badge
+
+[![Deploy to Vercel](https://api.button.dev/v1/badges/deploy-to-vercel.svg)](https://vercel.com/new)
+
+[![Deploy to Netlify](https://api.button.dev/v1/badges/deploy-to-netlify.svg)](https://app.netlify.com/start)
+
+## Development
+
+```bash
+# Clone and setup
+git clone <your-repo-url>
+cd rookie-project
+npm install
+
+# Run development server
+npm run dev
+
+# Run type checking
+npm run typecheck
+
+# Run tests
+npm test
+
+# Build for production
+npm run build
+```
+
+## Customization
+
+1. Update your personal information in `src/data/default-profile.ts`
+2. Add your real projects and skills
+3. Update contact links in the `contact` object
+4. Modify the theme colors in `src/app/globals.css`
 
 ## Contributing
 
-Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), then review [docs/architecture.md](docs/architecture.md) for module boundaries.
+Contributions are welcome! Start with [CONTRIBUTING.md](CONTRIBUTING.md), then review [docs/architecture.md](docs/architecture.md) for module boundaries.
 
 ## License
 
-MIT
+MIT - Feel free to use, modify, and deploy this anywhere!
+
+## Support
+
+If you find this useful, consider:
+- ⭐ Starring the repository
+- 🔄 Forking and customizing for your needs
+- 💬 Opening an issue to share your deployment link
