@@ -64,7 +64,7 @@ import {
 } from "@/lib/generators";
 import { exportDocx, exportPdf, exportPlainText } from "@/lib/exporters";
 import { downloadText } from "@/lib/utils";
-import type { CodingProfile, CodingPlatform, Profile, Project, ResumeTemplate, Skill } from "@/types/profile";
+import type { Application, ApplicationStatus, CodingProfile, CodingPlatform, Profile, Project, ResumeTemplate, Skill } from "@/types/profile";
 
 const ThreeSkillScene = dynamic(
   () => import("@/components/three-skill-scene").then((module) => module.ThreeSkillScene),
@@ -83,6 +83,7 @@ const navItems = [
   { href: "#benchmarking", label: "Benchmarking" },
   { href: "#portfolio", label: "Projects" },
   { href: "#generator", label: "Generator" },
+  { href: "#applications", label: "Applications" },
   { href: "#cms", label: "CMS" }
 ];
 
@@ -90,7 +91,11 @@ const resumeTemplates: ResumeTemplate[] = [
   "Software Engineer",
   "Data Analyst",
   "Product Manager",
-  "Research Intern"
+  "Research Intern",
+  "Executive",
+  "Academic",
+  "Creative",
+  "Functional"
 ];
 
 const codingPlatforms: CodingPlatform[] = [
@@ -777,6 +782,255 @@ function RoadmapSection({ profile }: { profile: Profile }) {
   );
 }
 
+const applicationStatuses: ApplicationStatus[] = [
+  "Researching",
+  "Applying",
+  "Applied",
+  "Interviewing",
+  "Offer",
+  "Rejected",
+  "Accepted"
+];
+
+function statusTone(status: ApplicationStatus): "blue" | "green" | "amber" | "rose" | "neutral" {
+  switch (status) {
+    case "Accepted":
+    case "Offer":
+      return "green";
+    case "Interviewing":
+    case "Applied":
+      return "blue";
+    case "Applying":
+      return "amber";
+    case "Rejected":
+      return "rose";
+    case "Researching":
+    default:
+      return "neutral";
+  }
+}
+
+function ApplicationsSection({ profile, setProfile }: { profile: Profile; setProfile: (profile: Profile) => void }) {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const pipeline = applicationStatuses.map((status) => ({
+    status,
+    count: profile.applications.filter((app) => app.status === status).length
+  }));
+
+  function updateApplication(id: string, field: keyof Application, value: Application[keyof Application]) {
+    setProfile(
+      updateProfileField(
+        profile,
+        "applications",
+        profile.applications.map((app) => (app.id === id ? { ...app, [field]: value } : app))
+      )
+    );
+  }
+
+  function addApplication() {
+    const next: Application = {
+      id: `app-${Date.now()}`,
+      company: "New Company",
+      role: "New Role",
+      status: "Researching",
+      dateApplied: new Date().toISOString().slice(0, 10),
+      location: "Remote",
+      notes: "",
+      url: "https://example.com",
+      salary: "",
+      timeline: []
+    };
+
+    setProfile(updateProfileField(profile, "applications", [...profile.applications, next]));
+    setExpandedId(next.id);
+  }
+
+  function removeApplication(id: string) {
+    setProfile(updateProfileField(profile, "applications", profile.applications.filter((app) => app.id !== id)));
+  }
+
+  function updateTimelineEntry(appId: string, index: number, patch: Partial<{ date: string; label: string }>) {
+    setProfile(
+      updateProfileField(
+        profile,
+        "applications",
+        profile.applications.map((app) => {
+          if (app.id !== appId) return app;
+
+          return { ...app, timeline: app.timeline.map((entry, i) => (i === index ? { ...entry, ...patch } : entry)) };
+        })
+      )
+    );
+  }
+
+  function addTimelineEntry(appId: string) {
+    setProfile(
+      updateProfileField(
+        profile,
+        "applications",
+        profile.applications.map((app) => {
+          if (app.id !== appId) return app;
+
+          return {
+            ...app,
+            timeline: [...app.timeline, { date: new Date().toISOString().slice(0, 10), label: "Update" }]
+          };
+        })
+      )
+    );
+  }
+
+  function removeTimelineEntry(appId: string, index: number) {
+    setProfile(
+      updateProfileField(
+        profile,
+        "applications",
+        profile.applications.map((app) => {
+          if (app.id !== appId) return app;
+
+          return { ...app, timeline: app.timeline.filter((_, i) => i !== index) };
+        })
+      )
+    );
+  }
+
+  return (
+    <motion.section
+      id="applications"
+      className="section-shell"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.12 }}
+      variants={sectionReveal}
+      transition={{ duration: 0.55 }}
+    >
+      <SectionHeading
+        eyebrow="Application Tracker"
+        title="Track every application in one pipeline."
+        description="Log roles, statuses, timelines, and outcomes. This local-first tracker keeps your job search organized without external services."
+      />
+      <div className="mb-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {pipeline.map((item) => (
+          <div key={item.status} className="rounded-[var(--radius)] border border-[rgba(var(--border),0.75)] p-3">
+            <div className="text-2xl font-semibold">{item.count}</div>
+            <div className="text-xs text-[rgb(var(--muted-foreground))]">{item.status}</div>
+          </div>
+        ))}
+      </div>
+      <div className="space-y-4">
+        {profile.applications.map((app) => {
+          const isOpen = expandedId === app.id;
+
+          return (
+            <Card key={app.id}>
+              <CardHeader>
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <CardTitle>{app.role}</CardTitle>
+                    <CardDescription>{app.company} · {app.location}</CardDescription>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Badge tone={statusTone(app.status)}>{app.status}</Badge>
+                    <Button type="button" variant="ghost" size="sm" onClick={() => setExpandedId(isOpen ? null : app.id)}>
+                      {isOpen ? "Hide" : "Edit"}
+                    </Button>
+                    <Button type="button" variant="ghost" size="icon" aria-label={`Remove ${app.company}`} onClick={() => removeApplication(app.id)}>
+                      <Trash2 aria-hidden className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              {isOpen ? (
+                <CardContent className="space-y-4">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div>
+                      <Label htmlFor={`${app.id}-company`}>Company</Label>
+                      <Input id={`${app.id}-company`} value={app.company} onChange={(event) => updateApplication(app.id, "company", event.target.value)} />
+                    </div>
+                    <div>
+                      <Label htmlFor={`${app.id}-role`}>Role</Label>
+                      <Input id={`${app.id}-role`} value={app.role} onChange={(event) => updateApplication(app.id, "role", event.target.value)} />
+                    </div>
+                    <div>
+                      <Label htmlFor={`${app.id}-status`}>Status</Label>
+                      <select
+                        id={`${app.id}-status`}
+                        value={app.status}
+                        onChange={(event) => updateApplication(app.id, "status", event.target.value as ApplicationStatus)}
+                        className="focus-ring h-10 w-full rounded-[var(--radius)] border border-[rgba(var(--border),0.9)] bg-[rgba(var(--card),0.72)] px-3 text-sm"
+                      >
+                        {applicationStatuses.map((status) => (
+                          <option key={status}>{status}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <Label htmlFor={`${app.id}-date`}>Date Applied</Label>
+                      <Input id={`${app.id}-date`} value={app.dateApplied} onChange={(event) => updateApplication(app.id, "dateApplied", event.target.value)} />
+                    </div>
+                    <div>
+                      <Label htmlFor={`${app.id}-location`}>Location</Label>
+                      <Input id={`${app.id}-location`} value={app.location} onChange={(event) => updateApplication(app.id, "location", event.target.value)} />
+                    </div>
+                    <div>
+                      <Label htmlFor={`${app.id}-salary`}>Salary / Compensation</Label>
+                      <Input id={`${app.id}-salary`} value={app.salary ?? ""} onChange={(event) => updateApplication(app.id, "salary", event.target.value)} />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <Label htmlFor={`${app.id}-url`}>Listing URL</Label>
+                      <Input id={`${app.id}-url`} value={app.url} onChange={(event) => updateApplication(app.id, "url", event.target.value)} />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor={`${app.id}-notes`}>Notes</Label>
+                    <Textarea id={`${app.id}-notes`} value={app.notes} onChange={(event) => updateApplication(app.id, "notes", event.target.value)} />
+                  </div>
+                  <div className="rounded-[var(--radius)] border border-[rgba(var(--border),0.75)] p-3">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <span className="text-sm font-semibold">Timeline</span>
+                      <Button type="button" size="sm" onClick={() => addTimelineEntry(app.id)}>
+                        <Plus aria-hidden className="h-4 w-4" />
+                        Add
+                      </Button>
+                    </div>
+                    <div className="space-y-3">
+                      {app.timeline.map((entry, index) => (
+                        <div key={index} className="grid gap-3 sm:grid-cols-[0.4fr_1fr_auto]">
+                          <Input
+                            value={entry.date}
+                            onChange={(event) => updateTimelineEntry(app.id, index, { date: event.target.value })}
+                            aria-label={`${app.company} timeline date`}
+                          />
+                          <Input
+                            value={entry.label}
+                            onChange={(event) => updateTimelineEntry(app.id, index, { label: event.target.value })}
+                            aria-label={`${app.company} timeline note`}
+                          />
+                          <Button type="button" variant="ghost" size="icon" aria-label="Remove timeline entry" onClick={() => removeTimelineEntry(app.id, index)}>
+                            <Trash2 aria-hidden className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
+                      {app.timeline.length === 0 ? (
+                        <p className="text-sm text-[rgb(var(--muted-foreground))]">No timeline entries yet.</p>
+                      ) : null}
+                    </div>
+                  </div>
+                </CardContent>
+              ) : null}
+            </Card>
+          );
+        })}
+        <Button type="button" variant="outline" onClick={addApplication}>
+          <Plus aria-hidden className="h-4 w-4" />
+          Add application
+        </Button>
+      </div>
+    </motion.section>
+  );
+}
+
 function updateProfileField<K extends keyof Profile>(profile: Profile, key: K, value: Profile[K]): Profile {
   return { ...profile, [key]: value, updatedAt: new Date().toISOString() };
 }
@@ -1263,8 +1517,9 @@ export function HomeClient() {
       <AnalyticsSection profile={profile} />
       <PortfolioSection profile={profile} />
       <DocumentGeneratorSection profile={profile} />
-      <RoadmapSection profile={profile} />
-      <ProfileCmsSection
+        <RoadmapSection profile={profile} />
+        <ApplicationsSection profile={profile} setProfile={setProfile} />
+        <ProfileCmsSection
         profile={profile}
         setProfile={setProfile}
         resetProfile={resetProfile}

@@ -337,7 +337,48 @@ export const defaultProfile: Profile = {
     linkedin: "https://linkedin.com/in/alexrivera",
     leetcode: "https://leetcode.com/alexcodes"
   },
-  applications: [],
+  applications: [
+    {
+      id: "app-stripe",
+      company: "Stripe",
+      role: "Backend Engineer Intern",
+      status: "Interviewing",
+      dateApplied: "2026-05-12",
+      location: "Remote",
+      notes: "Referred by alumni. Emphasis on distributed systems and API design.",
+      url: "https://stripe.com/jobs",
+      salary: "$9,000/mo",
+      timeline: [
+        { date: "2026-05-12", label: "Applied via referral" },
+        { date: "2026-05-20", label: "Phone screen completed" },
+        { date: "2026-06-02", label: "Technical round scheduled" }
+      ]
+    },
+    {
+      id: "app-vercel",
+      company: "Vercel",
+      role: "Frontend Engineer Intern",
+      status: "Applied",
+      dateApplied: "2026-06-01",
+      location: "Remote",
+      notes: "Highlighted the Next.js portfolio projects and open-source work.",
+      url: "https://vercel.com/careers",
+      salary: "",
+      timeline: [{ date: "2026-06-01", label: "Submitted application" }]
+    },
+    {
+      id: "app-databricks",
+      company: "Databricks",
+      role: "Data Engineering Intern",
+      status: "Researching",
+      dateApplied: "",
+      location: "Remote",
+      notes: "Reviewing system design and Spark fundamentals before applying.",
+      url: "https://databricks.com/careers",
+      salary: "",
+      timeline: []
+    }
+  ],
   aiInsights: [],
   updatedAt: "2026-06-25T00:00:00.000Z"
 };
